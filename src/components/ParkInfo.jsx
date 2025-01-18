@@ -2,17 +2,20 @@ import React from 'react';
 
 export default function ParkInfo({ onNext }) {
   return (
-    <div className="h-full text-gray-800">
-      <h1 className="text-2xl font-bold mb-4">Understanding UK Parking Fines</h1>
-      <p className="mb-4">
-        In the UK, Penalty Charge Notices (PCNs) are usually issued by local councils for
-        contraventions on public roads or council car parks. Private companies issue parking
-        tickets on privately-owned land. While PCNs are backed by law under the Traffic
-        Management Act, private tickets are considered contractual notices.
+    <div className="h-full text-gray-800 space-y-4">
+      <h1 className="text-2xl font-bold">Before You Appeal</h1>
+      <p>
+        Below is some general guidance, similar to what you'll find at Citizens Advice, on how
+        to prepare for appealing a parking ticket. Please note this is not official legal advice.
       </p>
-      <p className="mb-4">
-        Always check signage, evidence photos, and your parking ticket details. For more guidance,
-        visit <a href="https://www.citizensadvice.org.uk" target="_blank" className="underline text-blue-600">Citizens Advice</a>.
+      <ul className="list-disc list-inside space-y-2">
+        <li>Gather all evidence, including photos of signage or your vehicle if relevant.</li>
+        <li>Keep a record of all correspondence with the issuer.</li>
+        <li>Check the ticket's issue date and any details provided. Missing or incorrect details can be grounds for appeal.</li>
+        <li>Consult official sources like <a href="https://www.citizensadvice.org.uk/law-and-courts/parking-tickets/appealing-a-parking-ticket/" target="_blank" rel="noreferrer" className="underline text-blue-600">Citizens Advice</a> for more information on valid appeal reasons.</li>
+      </ul>
+      <p>
+        If you believe you have grounds for an appeal, proceed with this service to generate a structured letter. While we aim to provide helpful guidance, please be aware this platform is not a substitute for professional legal counsel.
       </p>
       <button
         type="button"

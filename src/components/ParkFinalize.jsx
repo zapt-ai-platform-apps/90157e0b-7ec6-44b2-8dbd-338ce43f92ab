@@ -9,6 +9,7 @@ export default function ParkFinalize({ formData }) {
 
   function handleAnalysis() {
     setLoading(true);
+    console.log('Evaluating appeal data:', formData);
     try {
       const result = evaluateAppeal(formData);
       setAnalysis(result);
@@ -21,6 +22,7 @@ export default function ParkFinalize({ formData }) {
   }
 
   function handleLetter() {
+    console.log('Generating appeal letter...');
     try {
       const draft = generateAppealLetter(formData);
       setLetter(draft);
@@ -32,14 +34,7 @@ export default function ParkFinalize({ formData }) {
 
   return (
     <div className="h-full text-gray-800 space-y-4">
-      {analysis ? (
-        <div className="border p-4 rounded">
-          <p className="font-semibold">
-            Likely Success: {analysis.likely ? 'Yes' : 'No'}
-          </p>
-          <p>{analysis.message}</p>
-        </div>
-      ) : (
+      {!analysis && (
         <button
           onClick={handleAnalysis}
           className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-200"
@@ -50,10 +45,21 @@ export default function ParkFinalize({ formData }) {
       )}
 
       {analysis && (
+        <div className="border p-4 rounded">
+          <p className="font-semibold">
+            Likely Success: {analysis.likely ? 'Yes' : 'No'}
+          </p>
+          <p className="mt-2">
+            {analysis.explanation}
+          </p>
+        </div>
+      )}
+
+      {analysis && (
         <div>
           <button
             onClick={handleLetter}
-            className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-all duration-200"
+            className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-all duration-200 mt-4"
           >
             Generate Letter
           </button>

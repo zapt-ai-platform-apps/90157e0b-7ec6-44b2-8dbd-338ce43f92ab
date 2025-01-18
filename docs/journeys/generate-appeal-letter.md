@@ -1,6 +1,11 @@
 # Generate Appeal Letter
 
-1. On the final screen, you can see a summary of whether your appeal may have good grounds, along with reasoning. Remember this is not legal advice.
-2. Click “Generate Letter.” The app will create a draft appeal letter using the details you provided.
-3. You can copy this text and send it to the issuer of your penalty or parking ticket. Be sure to customize it further if needed.
-4. Refer to the on-screen disclaimers and confirm you have reviewed all information, then finalize your submission or letter.
+1. On the final screen, you can see a detailed summary of your appeal’s likelihood of success, along with a more in-depth explanation of why it might succeed or fail. Remember this is not legal advice.
+2. Click “Generate Letter.” The app will create a detailed draft appeal letter using the details you provided:
+   - “From” section with your personal and contact information
+   - “To” section with the issuer’s details
+   - A reference to your parking ticket
+   - The date
+   - A comprehensive “Reasons for Appeal” section
+3. You can copy this text and send it to the issuer of your penalty or parking ticket. Be sure to include any evidence mentioned.
+4. Refer to the on-screen disclaimers and confirm you have reviewed all information, then finalize your submission or letter if needed.

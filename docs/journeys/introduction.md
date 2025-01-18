@@ -1,7 +1,6 @@
 # Introduction & Explanation
 
-1. When you first open the app, you will see an overview of UK parking laws. This overview explains the difference between local authority Penalty Charge Notices (PCNs) and private parking tickets.
-2. Read the summary to understand when a ticket is enforceable and when you may have grounds for appeal.
-3. Click on "Start Your Appeal" to begin the guided process.
-
-You will see references to reputable sources (such as Citizens Advice) to help you learn more about your rights.
+1. When you first open the app, you will see an expanded overview of UK parking laws and general Citizens Advice–style guidance on preparing an appeal. 
+2. This guidance covers what evidence to gather (e.g., photos, correspondence, receipts) and common pitfalls or mistakes to avoid before lodging an appeal.
+3. Read the summary to understand when a ticket is enforceable and when you may have grounds for appeal.
+4. Click on "Start Your Appeal" to begin the guided process, which will ask for both your personal details and information about the parking ticket.

@@ -8,10 +8,12 @@ export default function App() {
   const [finishedData, setFinishedData] = useState(null);
 
   function handleStart() {
+    console.log('User clicked Start Your Appeal');
     setShowForm(true);
   }
 
   function handleFormComplete(data) {
+    console.log('Form data complete:', data);
     setFinishedData(data);
   }
 

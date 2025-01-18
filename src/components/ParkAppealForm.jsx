@@ -8,27 +8,57 @@ export default function ParkAppealForm({ onComplete }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
-    issuerType: '',
+    userStreet: '',
+    userCity: '',
+    userPostcode: '',
+    userEmail: '',
+    userPhone: '',
+    issuerName: '',
+    issuerStreet: '',
+    issuerCity: '',
+    issuerPostcode: '',
+    ticketReference: '',
     dateOfIncident: '',
     location: '',
-    reasonForAppeal: '',
+    reasonsSelected: [],
+    otherReason: '',
     evidenceFiles: []
   });
 
   function handleChange(e) {
     try {
-      const { name, value, files } = e.target;
+      const { name, value, files, type, checked } = e.target;
+
+      // For multiple reasons logic
+      if (name === 'reasonsSelected') {
+        if (checked) {
+          setFormData((prev) => ({
+            ...prev,
+            reasonsSelected: [...prev.reasonsSelected, value]
+          }));
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            reasonsSelected: prev.reasonsSelected.filter((r) => r !== value)
+          }));
+        }
+        return;
+      }
+
+      // For evidence files
       if (name === 'evidenceFiles') {
         setFormData((prev) => ({
           ...prev,
           evidenceFiles: files
         }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: value
-        }));
+        return;
       }
+
+      // For all other fields
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value
+      }));
     } catch (error) {
       console.error('Error in handleChange:', error);
       Sentry.captureException(error);
@@ -36,9 +66,11 @@ export default function ParkAppealForm({ onComplete }) {
   }
 
   function handleNext() {
+    console.log('Moving to the next step from step', step);
     if (step < 2) {
       setStep(step + 1);
     } else {
+      console.log('Form submission complete');
       onComplete(formData);
     }
   }
