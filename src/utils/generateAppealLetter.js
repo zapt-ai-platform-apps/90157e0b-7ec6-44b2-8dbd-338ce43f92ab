@@ -1,4 +1,6 @@
-export function generateAppealLetter(formData) {
+import { formatDateToDDMMYYYY } from './formatHelpers';
+
+export function generateAppealLetter(formData, appealAnalysis) {
   const {
     fullName,
     userStreet,
@@ -14,45 +16,57 @@ export function generateAppealLetter(formData) {
     dateOfIncident,
     location,
     reasonsSelected,
-    otherReason
+    reasonDetails,
+    evidenceFiles
   } = formData;
 
-  // Combine selected reasons
+  const formattedDateIncident = formatDateToDDMMYYYY(dateOfIncident);
+  const todayIso = new Date().toISOString();
+  const formattedToday = formatDateToDDMMYYYY(todayIso);
+
+  // Check if notice was likely unfair
+  const unfairNotice = appealAnalysis?.likely;
+
+  // Build reason text
   let reasonsText = '';
-  if (reasonsSelected.length > 0) {
-    const filteredReasons = reasonsSelected.filter((r) => r !== 'Other');
-    if (filteredReasons.length) {
-      reasonsText += '- ' + filteredReasons.join('\n- ');
+  reasonsSelected.forEach((reason) => {
+    reasonsText += `\n• ${reason}`;
+    if (reasonDetails[reason]?.trim()) {
+      reasonsText += `: ${reasonDetails[reason]}`;
     }
-    if (reasonsSelected.includes('Other') && otherReason.trim()) {
-      reasonsText += `\n- Other: ${otherReason}`;
-    }
-  }
+  });
+
+  const unfairStatement = unfairNotice
+    ? 'Based on the facts above, I believe this notice was unfairly issued. '
+    : '';
 
   return `
-From:
 ${fullName}
 ${userStreet}
 ${userCity}, ${userPostcode}
-${userEmail}
-${userPhone}
+Email: ${userEmail}
+Phone: ${userPhone}
+
+${formattedToday}
 
 To:
 ${issuerName}
 ${issuerStreet}
 ${issuerCity}, ${issuerPostcode}
 
-Date: ${dateOfIncident}
+Dear Sir/Madam,
 
-To whom it may concern,
+Re: Parking Ticket Reference ${ticketReference} – Issued on ${formattedDateIncident} at ${location}
 
-Re: Parking ticket ${ticketReference}
+I am writing to formally challenge the above parking ticket. I have provided my reasons and all relevant evidence below. ${unfairStatement}I respectfully request that you review this information and cancel the notice in light of the evidence presented.
 
-I was issued a parking ticket for parking at ${location} on ${dateOfIncident}. I wish to challenge this parking ticket on the following grounds:
+Grounds for Challenge:
+${reasonsText || 'No specific reasons were selected.'}
 
-${reasonsText || 'No specific reasons provided.'}
+Enclosed/Attached Evidence:
+${evidenceFiles && evidenceFiles.length ? 'I have included the following files for your reference.' : 'No additional files were provided.'}
 
-I have enclosed any relevant evidence to support my appeal. Please review and confirm whether this ticket meets all legal requirements.
+Please confirm receipt of my appeal and provide a full response explaining whether you will cancel the ticket. If you choose not to cancel, please explain in detail why.
 
 Yours faithfully,
 

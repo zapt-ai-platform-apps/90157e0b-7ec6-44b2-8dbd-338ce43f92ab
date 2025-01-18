@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { evaluateAppeal, generateAppealLetter } from '../utils/appealLogic';
 import * as Sentry from '@sentry/browser';
+import AnalysisSection from './AnalysisSection';
+import LetterDraft from './LetterDraft';
 
 export default function ParkFinalize({ formData }) {
   const [analysis, setAnalysis] = useState(null);
@@ -24,7 +26,7 @@ export default function ParkFinalize({ formData }) {
   function handleLetter() {
     console.log('Generating appeal letter...');
     try {
-      const draft = generateAppealLetter(formData);
+      const draft = generateAppealLetter(formData, analysis);
       setLetter(draft);
     } catch (error) {
       console.error('Error generating letter:', error);
@@ -45,14 +47,7 @@ export default function ParkFinalize({ formData }) {
       )}
 
       {analysis && (
-        <div className="border p-4 rounded">
-          <p className="font-semibold">
-            Likely Success: {analysis.likely ? 'Yes' : 'No'}
-          </p>
-          <p className="mt-2">
-            {analysis.explanation}
-          </p>
-        </div>
+        <AnalysisSection analysis={analysis} />
       )}
 
       {analysis && (
@@ -60,6 +55,7 @@ export default function ParkFinalize({ formData }) {
           <button
             onClick={handleLetter}
             className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-all duration-200 mt-4"
+            disabled={loading}
           >
             Generate Letter
           </button>
@@ -67,10 +63,7 @@ export default function ParkFinalize({ formData }) {
       )}
 
       {letter && (
-        <div className="border p-4 mt-4 rounded whitespace-pre-line">
-          <h3 className="font-bold mb-2">Draft Appeal Letter</h3>
-          {letter}
-        </div>
+        <LetterDraft letter={letter} />
       )}
     </div>
   );

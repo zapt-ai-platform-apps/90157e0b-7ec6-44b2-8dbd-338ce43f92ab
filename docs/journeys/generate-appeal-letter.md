@@ -5,7 +5,7 @@
    - “From” section with your personal and contact information
    - “To” section with the issuer’s details
    - A reference to your parking ticket
-   - The date
-   - A comprehensive “Reasons for Appeal” section
-3. You can copy this text and send it to the issuer of your penalty or parking ticket. Be sure to include any evidence mentioned.
-4. Refer to the on-screen disclaimers and confirm you have reviewed all information, then finalize your submission or letter if needed.
+   - The date in DD/MM/YYYY format
+   - A comprehensive “Reasons for Appeal” section, including your elaborations
+3. After the letter is generated, you can use the new icons (MS Word, PDF, Print, Email) to export or share your letter directly. Hover over each icon to see what it does.
+4. Refer to the on-screen disclaimers and confirm you have reviewed all information, then finalize your submission if needed.

@@ -1,8 +1,16 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
 import ReasonsCheckboxGroup from './ReasonsCheckboxGroup';
+import ParkAppealFormStep2Fields from './ParkAppealFormStep2Fields';
 
-export default function ParkAppealFormStep2({ formData, handleChange, handleNext, setLoading, loading }) {
+export default function ParkAppealFormStep2({
+  formData,
+  handleChange,
+  handleNext,
+  setLoading,
+  loading,
+  handleReasonDetailChange
+}) {
   const handleSubmit = () => {
     setLoading(true);
     try {
@@ -16,107 +24,18 @@ export default function ParkAppealFormStep2({ formData, handleChange, handleNext
     }
   };
 
-  const handleOtherChange = (e) => {
-    handleChange(e);
-  };
-
   return (
     <div className="h-full text-gray-800 space-y-4">
-      <label className="block">
-        Issuer Name:
-        <input
-          type="text"
-          name="issuerName"
-          value={formData.issuerName}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Issuer Street:
-        <input
-          type="text"
-          name="issuerStreet"
-          value={formData.issuerStreet}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Issuer City:
-        <input
-          type="text"
-          name="issuerCity"
-          value={formData.issuerCity}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Issuer Postcode:
-        <input
-          type="text"
-          name="issuerPostcode"
-          value={formData.issuerPostcode}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Ticket Reference:
-        <input
-          type="text"
-          name="ticketReference"
-          value={formData.ticketReference}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Date Ticket Issued:
-        <input
-          type="date"
-          name="dateOfIncident"
-          value={formData.dateOfIncident}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
-      <label className="block">
-        Location:
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
+      <ParkAppealFormStep2Fields formData={formData} handleChange={handleChange} handleReasonDetailChange={handleReasonDetailChange} />
+      <p className="text-sm text-gray-600">
+        Feel free to provide additional context for each selected reason so we can include it in your final appeal letter.
+      </p>
       <ReasonsCheckboxGroup
         reasonsSelected={formData.reasonsSelected}
-        handleChange={handleChange}
-        otherReason={formData.otherReason}
-        handleOtherChange={handleOtherChange}
+        reasonDetails={formData.reasonDetails}
+        handleToggleReason={handleChange}
+        handleReasonDetailChange={handleReasonDetailChange}
       />
-
-      <label className="block">
-        Upload Evidence (photos, etc.):
-        <input
-          type="file"
-          name="evidenceFiles"
-          multiple
-          onChange={handleChange}
-          className="box-border border w-full p-2 mt-1"
-        />
-      </label>
-
       <button
         onClick={handleSubmit}
         className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded mt-4 hover:bg-green-700 transition-all duration-200"
